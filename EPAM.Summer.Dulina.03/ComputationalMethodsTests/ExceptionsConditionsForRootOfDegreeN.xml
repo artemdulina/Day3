@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestCases>
+  <TestCase>
+    <Value>-100</Value>
+    <Accuracy>0,001</Accuracy>
+  </TestCase>
+  <TestCase>
+    <Value>555</Value>
+    <Accuracy>-0,001</Accuracy>
+  </TestCase>
+  <TestCase>
+    <Value>555</Value>
+    <Accuracy>2</Accuracy>
+  </TestCase>
+</TestCases>

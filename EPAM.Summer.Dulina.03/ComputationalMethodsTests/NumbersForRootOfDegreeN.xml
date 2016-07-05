@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestCases>
+  <TestCase>
+    <Value>100</Value>
+    <Power>2</Power>
+    <Accuracy>0,001</Accuracy>
+    <ExpectedResult>10</ExpectedResult>
+  </TestCase>
+  <TestCase>
+    <Value>5555</Value>
+    <Power>0,5</Power>
+    <Accuracy>0,001</Accuracy>
+    <ExpectedResult>30858025</ExpectedResult>
+  </TestCase>
+</TestCases>
