@@ -1,20 +1,15 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System;
 using ComputationalMethods;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Diagnostics;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ComputationalMethods.Tests
+namespace ComputationalMethodsTests
 {
-    [TestClass()]
+    [TestClass]
     public class AlgebraTests
     {
         public TestContext TestContext { get; set; }
 
-        [TestMethod()]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void GreatestCommonDivisionTest_ValuesAreZero__ShouldThrowArgumentException()
         {
@@ -56,31 +51,47 @@ namespace ComputationalMethods.Tests
             double actual = Algebra.RootOfDegreeN(value, n, accuracy);
 
             // assert
-            if (Math.Abs(expected - actual) > accuracy)
-            {
-                Assert.Fail("Accuracy test failed");
-            }
+            Assert.IsFalse(Math.Abs(expected - actual) > accuracy);
         }
 
-        [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "|DataDirectory|\\ExceptionsConditionsForRootOfDegreeN.xml", "TestCase", DataAccessMethod.Sequential), DeploymentItem("ExceptionsConditionsForRootOfDegreeN.xml")]
         [TestMethod]
-        public void RootOfDegreeNTest_ValueAndAccuracyArguments__ShouldThrowArgumentException()
+        [ExpectedException(typeof(ArgumentException))]
+        public void RootOfDegreeNTest_NegativeValue__ShouldThrowArgumentException()
         {
             // arrange
-            double value = Convert.ToDouble(TestContext.DataRow["Value"]);
-            double accuracy = Convert.ToDouble(TestContext.DataRow["Accuracy"]);
+            double value = -1;
 
             // act
-            try
-            {
-                double actual = Algebra.RootOfDegreeN(value, 1, accuracy);
-            }
-            catch (ArgumentException exception)
-            {
-                return;
-            }
+            Algebra.RootOfDegreeN(value, 1);
+
             // assert is handled by ExpectedException
-            Assert.Fail(string.Format("ShouldThrowArgumentException: value:{0} or accuracy:{1}", value, accuracy));
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void RootOfDegreeNTest_NegativeAccuracy__ShouldThrowArgumentException()
+        {
+            // arrange
+            double accuracy = -1;
+
+            // act
+            Algebra.RootOfDegreeN(2, 1, accuracy);
+
+            // assert is handled by ExpectedException
+
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void RootOfDegreeNTest_AccuracyGreaterThanOne__ShouldThrowArgumentException()
+        {
+            // arrange
+            double accuracy = 1.5;
+
+            // act
+            Algebra.RootOfDegreeN(2, 1, accuracy);
+
+            // assert is handled by ExpectedException
 
         }
     }

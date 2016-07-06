@@ -38,5 +38,17 @@ namespace ComputationMethodsNUnitTests
             // assert is handled by ExpectedException
             Assert.Throws<ArgumentException>(() => Algebra.GreatestCommonDivision(a, b));
         }
+
+        [Test]
+        [TestCase(int.MinValue, int.MaxValue)]
+        public void GreatestCommonDivisionTest_IntMinValue__ShouldThrowOverflowException(int a, int b)
+        {
+            // arrange
+
+            // act
+
+            // assert is handled by ExpectedException
+            Assert.Throws<OverflowException>(() => Algebra.GreatestCommonDivision(a, b));
+        }
     }
 }
