@@ -82,6 +82,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="BitStuffingTests.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="ExceptionsConditionsForRootOfDegreeN.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

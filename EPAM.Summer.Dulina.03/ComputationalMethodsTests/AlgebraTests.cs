@@ -11,7 +11,7 @@ namespace ComputationalMethodsTests
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void GreatestCommonDivisionTest_ValuesAreZero__ShouldThrowArgumentException()
+        public void GreatestCommonDivisionTest_ValuesAreZero_ShouldThrowArgumentException()
         {
             // arrange
 
@@ -56,7 +56,7 @@ namespace ComputationalMethodsTests
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void RootOfDegreeNTest_NegativeValue__ShouldThrowArgumentException()
+        public void RootOfDegreeNTest_NegativeValue_ShouldThrowArgumentException()
         {
             // arrange
             double value = -1;
@@ -69,7 +69,7 @@ namespace ComputationalMethodsTests
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void RootOfDegreeNTest_NegativeAccuracy__ShouldThrowArgumentException()
+        public void RootOfDegreeNTest_NegativeAccuracy_ShouldThrowArgumentException()
         {
             // arrange
             double accuracy = -1;
@@ -83,7 +83,7 @@ namespace ComputationalMethodsTests
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void RootOfDegreeNTest_AccuracyGreaterThanOne__ShouldThrowArgumentException()
+        public void RootOfDegreeNTest_AccuracyGreaterThanOne_ShouldThrowArgumentException()
         {
             // arrange
             double accuracy = 1.5;
@@ -93,6 +93,81 @@ namespace ComputationalMethodsTests
 
             // assert is handled by ExpectedException
 
+        }
+
+        [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "|DataDirectory|\\BitStuffingTests.xml",
+            "TestCase", DataAccessMethod.Sequential), DeploymentItem("BitStuffingTests.xml")]
+        [TestMethod]
+        public void BitStuffing_DataDrivenValues_AllShouldPass()
+        {
+            // arrange
+            int a = Convert.ToInt32(Convert.ToString(TestContext.DataRow["FirstNumber"]), 2);
+            int b = Convert.ToInt32(Convert.ToString(TestContext.DataRow["SecondNumber"]), 2);
+            int from = Convert.ToInt32(TestContext.DataRow["From"]);
+            int to = Convert.ToInt32(TestContext.DataRow["To"]);
+            string result = Convert.ToString(TestContext.DataRow["Result"]);
+
+            // act
+            int actual = Algebra.BitStuffing(a, b, from, to);
+
+            // assert
+            Assert.AreEqual(result, Convert.ToString(actual, 2));
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void BitStuffing_NegativeFrom_ShouldThrowArgumentException()
+        {
+            // arrange
+            int from = -1;
+            int to = 1;
+
+            // act
+            Algebra.BitStuffing(2, 1, from, to);
+
+            // assert is handled by ExpectedException
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void BitStuffing_NegativeTo_ShouldThrowArgumentException()
+        {
+            // arrange
+            int from = 1;
+            int to = -1;
+
+            // act
+            Algebra.BitStuffing(2, 1, from, to);
+
+            // assert is handled by ExpectedException
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void BitStuffing_FromToDifference_ShouldThrowArgumentException()
+        {
+            // arrange
+            int from = 0;
+            int to = 2;
+
+            // act
+            Algebra.BitStuffing(31, 11, from, to);
+
+            // assert is handled by ExpectedException
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void BitStuffing_SizeOfIntOverflow_ShouldThrowArgumentException()
+        {
+            // arrange
+            int from = 31;
+            int to = 40;
+
+            // act
+            Algebra.BitStuffing(31, 11, from, to);
+
+            // assert is handled by ExpectedException
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using System.Globalization;
 
 namespace ComputationalMethods
 {
@@ -188,6 +189,46 @@ namespace ComputationalMethods
             int result = GreatestCommonDivisionBinary(values);
             timer.Stop();
             time = timer.Elapsed;
+            return result;
+        }
+
+        public static int BitStuffing(int a, int b, int from, int to)
+        {
+            if (from < 0 || to < 0)
+            {
+                throw new ArgumentException("from and to cant'be negative");
+            }
+            if (from >= to)
+            {
+                throw new ArgumentException("from must be less than to");
+            }
+            if (to - from + 1 < Convert.ToString(b, 2).Length)
+            {
+                throw new ArgumentException(
+                    "difference beetween to and from must be greater than or equal to the number of bits in the second number");
+            }
+            int bitCount = sizeof(int) * 8 - 1;
+            string binaryB = Convert.ToString(b, 2);
+            string binaryA = Convert.ToString(a, 2);
+            StringBuilder str = new StringBuilder(binaryA);
+            if (from + 1 <= binaryA.Length)
+            {
+                str.Insert(binaryA.Length - from, binaryB);
+                if (to - from + 1 > binaryB.Length)
+                {
+                    str.Insert(binaryA.Length - from, "0", to - from + 1 - binaryB.Length);
+                }
+            }
+            else
+            {
+                str.Insert(0, "0", from - binaryA.Length);
+                str.Insert(0, binaryB);
+            }
+            if (str.Length > bitCount)
+            {
+                throw new ArgumentException("size of int overflow");
+            }
+            int result = Convert.ToInt32(str.ToString(), 2);
             return result;
         }
 

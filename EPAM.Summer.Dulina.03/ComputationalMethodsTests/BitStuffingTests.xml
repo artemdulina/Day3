@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestCases>
+  <TestCase>
+    <FirstNumber>11111</FirstNumber>
+    <SecondNumber>1011</SecondNumber>
+    <From>0</From>
+    <To>3</To>
+    <Result>111111011</Result>
+  </TestCase>
+  <TestCase>
+    <FirstNumber>11111</FirstNumber>
+    <SecondNumber>1011</SecondNumber>
+    <From>6</From>
+    <To>9</To>
+    <Result>1011011111</Result>
+  </TestCase>
+  <TestCase>
+    <FirstNumber>11111</FirstNumber>
+    <SecondNumber>1011</SecondNumber>
+    <From>1</From>
+    <To>4</To>
+    <Result>111110111</Result>
+  </TestCase>
+  <TestCase>
+    <FirstNumber>11111</FirstNumber>
+    <SecondNumber>1011</SecondNumber>
+    <From>1</From>
+    <To>5</To>
+    <Result>1111010111</Result>
+  </TestCase>
+</TestCases>
